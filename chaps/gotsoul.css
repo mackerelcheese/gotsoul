@@ -1,5 +1,14 @@
-body {
-    background: pink;
+
+/***links***/
+
+.links {
+    color: #0000FF;
+    text-decoration: underline;
+    opacity: 0.7;
+}
+
+.links:hover {
+    opacity: 1;
 }
 
 /*****clicky arrow begone***/

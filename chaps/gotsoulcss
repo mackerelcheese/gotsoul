@@ -1,0 +1,1662 @@
+body {
+    background: pink;
+}
+
+/*****clicky arrow begone***/
+
+.reddit-comment-react details summary::-webkit-details-marker,
+.reddit-comment-react details summary::marker {
+    display:none;
+}
+
+.reddit-comment-react details > summary {
+    list-style: none;
+}
+
+/**POV swap***/
+.pov {
+  font-size: 2em;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+/***reddit****/
+
+  /*
+  i do not, i repeat do NOT remember making vr0-2. i mean, i remember thinking "i should fix that weird issue where sometimes things collapse instead of float", i remember sitting down, i remember thinking "what if tables" but i DO NOT remember what it does or how it works. idk if half of that even needs to be there and honestly at this point i dont care. i also remeber thinking "GOTTA NEST THOSE DIVS" which we... appparently did not do. so that's. that's cool. 
+  
+  the last thing we might wanna do here is use the fadeout function and place the 'view all comments' button over top of it. rn im tired tho. messing w relative/ablosute is one of my least favorite things. 
+  */
+.rd-font{
+    font-family:verdana, arial, helvetica, sans-serif;
+    /* background-color: white; */
+    /*make sure this didnt break everything*/
+    /* color:black; */
+    font-size: 13px;
+    padding: 6px;
+    max-width: 600px;
+    margin: 30px auto;
+}
+.rd-view-box {
+    background: #0079D3;
+    border-radius: 3px;
+    text-align: center;
+    color: white;
+    font-weight:bold;
+    padding: 7px;
+    margin: 0px 5px -5px 5px;
+    cursor: pointer;
+}
+.rd-signup-box {
+    background: #0079D3;
+    border-radius: 14px;
+    text-align: center;
+    color: white;
+    padding: 7px 5px 7px 5px;
+    margin: 0px 5px -5px 5px;
+    font-size:0.8em;
+}
+.rd-sortby{
+    font-size:0.8em;
+    padding-left:5px;
+}
+.rd-photo-box {
+    background: #d3dce0;
+    border-radius: 18px;
+    color: black;
+    padding: 2px 10px 2px 10px;
+}
+.rd-name{
+    text-align: center;
+    font-weight:bold;
+    font-size:1.2em;
+}
+.rd-header{
+    font-weight:bold;
+    font-size:1.1em;
+    margin: -5px 0px -5px 0px;
+}
+.rd-dot { /*idx if i wanna go down this path*/
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 10px;
+    background-color: #bbb;
+    margin-bottom: -15px;
+}
+.rd-div1 {
+    border-bottom: 8px solid #EEEFF1;
+    /* padding-bottom:18px; */
+    /* padding-left:8px; */
+    /* margin-bottom: 10px; */
+    margin-left: -6px;
+    margin-right: -6px;
+}
+.rd-div2{
+    border-bottom: 1.5px solid #EEEFF1;
+}
+.rd-vote{
+    height:1.8em;
+    display: inline-block;
+    padding-top:5px;
+    padding-bottom:5px;
+    cursor: pointer;
+}
+.rd-poster{
+    font-size: .8em;
+    margin-bottom: 15px;
+}
+.rd-op {
+    color:#25A0ED;
+    font-weight:bold;
+    cursor: pointer;
+}
+
+.rd-op:hover {
+    text-decoration: underline;
+}
+
+.rd-link{
+    color:#25A0ED;
+}
+.rd-down-arrow {
+    border: solid black;
+    border-width: 0px 2px 2px 0px;
+    display: inline-block;
+    padding: 2.5px;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    margin: 0px 0px 2px 7px;
+}
+.rd-small{
+    font-size: .8em;
+    display: inline-block;
+    padding-bottom:5px;
+}
+
+.rd-small > strong:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.rd-vr0 {
+    display: table;
+    padding: 10px 0px 0px 30px;
+    border-bottom: 1px solid #EEEFF1;
+}
+.rd-vr1 {
+    display: table;
+    padding: 0px 0px 0px 10px;
+    margin: 0px 0px 5px 5px;
+    border-left: 1px solid #EEEFF1;
+}
+.rd-vr2 {
+    display: table;
+    padding: 0px 0px 0px 10px;
+    margin: 0px 0px 5px 5px;
+    border-left: 1px solid #EEEFF1;
+}
+.rd-vr-not {
+    display: table;
+    padding: 0px 0px 0px 0px;
+    margin: 0px 0px 5px 0px;
+}
+.rd-gray-text {
+    /* color: #657685; */
+    opacity: 0.7;
+}
+
+.rd-bubble {
+    color: #787C7F;
+    font-size: .8em;
+    padding: 12px 5px 3px 5px;
+    margin-bottom: 5px;
+    border-radius: 16px;
+    border: 1px solid #EEEFF1;
+    /* cursor: pointer; */
+    display: inline;
+}
+
+.rd-bubble p {
+    display: inline;
+    cursor: text;
+}
+  
+.rd-bubble details, .rd-bubble summary {
+    display: inline-block;
+}
+
+/* toggle reddit up / down vote, fake tri state */
+details.rd-up-cont[open] .unliked,
+details.rd-down-cont[open] .unliked,
+details.rd-up-cont:not([open]) .liked,
+details.rd-down-cont:not([open]) .liked {
+    display: none;
+}
+
+.default-vote,
+details.rd-up-cont:not([open]) .unliked,
+details.rd-down-cont:not([open]) .unliked,
+details.rd-up-cont[open] .liked,
+details.rd-down-cont[open] .liked {
+    display: inline-block;
+}
+
+/* toggle voter count on up / down */
+.rd-bubble:has(.rd-up-cont:not([open])):has(.rd-down-cont:not([open])) .up-vote,
+.rd-bubble:has(.rd-up-cont:not([open])):has(.rd-down-cont:not([open])) .down-vote,
+.rd-bubble:has(.rd-up-cont[open]) .down-vote,
+.rd-bubble:has(.rd-up-cont[open]) .default-vote,
+.rd-bubble:has(.rd-down-cont[open]) .up-vote,
+.rd-bubble:has(.rd-down-cont[open]) .default-vote
+{
+    display: none;
+}
+
+.rd-bubble:has(.rd-up-cont[open]) .up-vote,
+.rd-bubble:has(.rd-down-cont[open]) .down-vote 
+{
+    display: inline-block;
+}
+
+.inactive {
+    display: none;
+    cursor: not-allowed !important;
+}
+
+.rd-bubble:has(details[open]) details:not([open]) {
+    display: none;
+}
+
+.rd-bubble:has(.rd-down-cont[open]) .rd-arrow-up.inactive,
+.rd-bubble:has(.rd-up-cont[open]) .rd-arrow-down.inactive {
+    display: inline-block;
+}
+
+.rd-div1 p, .rd-vr.rd-div2 p {
+    margin: 0px;
+}
+
+.reddit-comment-react details {
+    margin: 0px;
+}
+
+.reddit-comment-react {
+    display: inline-flex;
+}
+
+/* toggle liked reddit COMMENT (like only) */
+.reddit-react-like[open] .unliked,
+.reddit-react-like:not([open]) .liked,
+.reddit-react-dislike[open] .unliked,
+.reddit-react-dislike:not([open]) .liked {
+  display: none;
+}
+
+.reddit-react-like:not([open]) .unliked,
+.reddit-react-like[open] .liked,
+.reddit-react-dislike:not([open]) .unliked,
+.reddit-react-dislike[open] .liked {
+  display: inline;
+}
+
+.reddit-comment-react:has(details[open]) details:not([open]) {
+  display: none;
+}
+
+.reddit-comment-react:has(.reddit-react-like[open]) .react-dislike.inactive,
+.reddit-comment-react:has(.reddit-react-dislike[open]) .react-like.inactive
+{
+   display: inline-block;
+}
+
+.rd-comment-react-reply {
+  padding-left: 13px;
+  margin-top: -7px;
+}
+
+.rd-left {
+    margin-left: 2px;
+}
+  
+.rd-arrow-text{
+    padding-top:2px;
+    margin-bottom: 10px;
+    vertical-align: super;
+    display: inline-block;
+}
+.rd-arrow-up{
+    padding-top:0px;
+    padding-bottom:0px;
+    height:1.5em;
+    cursor: pointer;
+}
+.rd-arrow-down{
+    -webkit-transform: scaleY(-1);
+    transform: scaleY(-1);
+    height:1.5em;
+    cursor: pointer;
+}
+.rd-elispes {
+    float:right;
+    padding-right:10px;
+    font-size:1.0em;
+    cursor: pointer;
+}
+
+.rd-mod {
+    color:green;
+    font-weight: bold;
+}
+
+
+/**daily planet**/ 
+.dp-con {
+    width:300px;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: 'Times New Roman', Times, serif;
+    background: white;
+
+}
+
+.dp-con p {
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 14px;
+}
+
+.dp-menu {
+    height:30px;
+    margin-left:10px;
+}
+
+.dp-logo-con {
+    width:300px;
+    margin-top: 8px;
+    position: relative;
+    margin-bottom: 0;
+}
+
+.dp-subs {
+    font-size: 8px;
+    border: 1.5px solid black;
+    padding:2px;
+    width:55px;
+    position: absolute;
+    right:10px;
+    top:10px;
+    text-align: center;
+    color: white;
+    background-color: black;
+}
+
+.dp-subs:hover {
+    background-color: white;
+    color: black;
+}
+
+.dp-logo {
+    height:40px;
+    margin-right: auto;
+    margin-left: 15px;
+}
+
+.dp-date {
+    background:#DBDBDB; 
+    font-size: 10px;
+    padding-top:5px;
+    padding-bottom:5px;
+    padding-left:10px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    color: black;
+}
+
+.dp-headline {
+    font-size:20px;
+    margin-left:10px;
+    margin-top: 10px;
+    font-weight: bold;
+    font-family: 'Times New Roman', Times, serif;
+    color: black;
+}
+.dp-thumbnail {
+    width:100%;
+    margin-top: 5px;
+}
+
+.dp-cap {
+    color:#969696;
+    font-style: italic;
+    font-size: smaller;
+    margin-left:10px;
+    margin-right:10px;
+
+}
+
+.dp-author {
+    font-size: 10px;
+    margin-left:10px;
+    text-transform: uppercase;
+    color: black;
+}
+
+.dp-slogan {
+    color:#969696;
+    font-style: italic;
+    font-size: 13px;
+    text-align: center;
+    margin-bottom: 5px;;
+}
+
+.dp-newsdesk {
+    display: flex;
+    width: 300px;
+    height:30px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
+.dp-newsdesk div {
+    padding: 5px;
+    border-top:1px solid #969696;
+    border-bottom:1px solid #969696;
+}
+
+.dp-newsdesk div:hover {
+    text-decoration: underline;
+}
+
+.dp-related {
+    margin-left: 10px;
+    font-size: 18px;
+}
+
+.dp-related li {
+    font-size: 14px;
+}
+
+.dp-related span {
+    color: #0000FF;
+    text-decoration: underline;
+    opacity: 0.7;
+}
+
+.dp-related span:hover {
+    opacity: 1;
+}
+
+/****gotham gazette***/
+
+.gg-con {
+    width:300px;
+    background-color: white;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.gg-con p {
+    margin-left: 10px;
+    margin-right:10px;
+    font-size: 14px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.gg-con-head {
+    padding-top: 10px;
+    width: 100%;
+}
+
+.gg-logo {
+    height:30px;
+}
+
+.gg-menu {
+    height:30px;
+    margin-left: 10px;
+}
+
+.gg-newsdesk {
+    color:white;
+    background: black;
+    padding-top:5px;
+    padding-bottom:5px;
+    text-align: center;
+}
+
+.gg-newsdesk span {
+    text-transform: uppercase;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+}
+
+.gg-flair {
+    background-color: #2c4e90;
+    width:60px;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    padding:2px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    margin-bottom:10px;
+    border-radius: 0 10px;
+}
+
+.gg-headline {
+    margin-left: 10px;
+    margin-right:10px;
+    font-size: 20px;
+    color: black;
+}
+
+.gg-date {
+    font-size:14px;
+    margin-top: 5px;
+    margin-left: 10px;
+    margin-right:10px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: black;
+}
+
+.gg-thumbnail {
+    width:100%;
+    margin-top: 10px;
+}
+
+.gg-photocap {
+    margin-left: 10px;
+    margin-right:10px;
+    font-size: 14px;
+    font-style: italic;
+    
+}
+
+.gg-author {
+    margin-left: 10px;
+    margin-right:10px;
+    text-transform: uppercase;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size:10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: black;
+}
+
+/****wordpush****/ 
+
+.wp-con {
+    width:300px;
+    background-color: #F2F0EF;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.wp-header {
+    font-size: 14px;
+    background:#222831;
+    color: white;
+    font-weight: bold;
+    height:20px;
+    padding-top: 10px;
+    padding-bottom:10px;
+}
+    
+.wp-home {
+    display: inline;
+    float: left;
+    width:15px;
+    margin-right: 5px;
+    margin-left: 10px;
+}
+
+.wp-dash {
+    margin: 10px;
+    font-size: 24px;
+    color:black;
+}
+
+.wp-box {
+    width: 260px;
+    border: 0.5px solid #66615E;
+    margin-left: auto;
+    margin-right: auto;
+    padding:5px;
+    border-radius: 5px;
+}
+
+.wp-box-head {
+    border-bottom:  0.5px solid #66615E;
+    padding-bottom: 5px;
+}
+
+.wp-table {
+    width: 260px;
+    font-size: 12px;
+    table-layout: fixed;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    border-collapse: collapse;
+}
+
+.wp-table tr td,
+.wp-table th {
+    padding:10px;
+}
+
+
+.wp-table tr td:nth-child(1),
+.wp-table tr td:nth-child(2) {
+    color: #0000FF;
+    text-decoration: underline;
+    opacity: 0.7;
+}
+
+.wp-table tr:nth-child(even) {
+    background-color: white;
+}
+
+.wp-view {
+    margin-top: 10px;
+    font-size: 14px;
+    width:250px;
+    background:grey;
+    height:2-px;
+    padding:5px;
+    text-align: center;
+    color: white;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+/****ios***/
+
+/****ios resend drama****/
+/* la temperanza texting https://archiveofourown.org/works/6434845/chapters/14729722 */
+.phone {
+  max-width: 300px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  display: table;
+  margin: 0px auto 50px auto;
+  font-size: 16px;
+}
+
+.grouptext-info {
+    color: red;
+    font-size: 12px;
+    float: right;
+    clear: both;
+    margin-top: -9px;
+}
+
+.not-sent {
+    left: -25px;
+  }
+  
+.not-sent::before {
+  content: url(https://i.imgur.com/HYHA5Sz.png);
+  position: absolute;
+  right: -27px;
+  cursor: pointer;
+}
+
+.not-sent-cont {
+    float: right;
+    clear: both;
+}
+
+.not-sent-cont .breply {
+    left: -25px;
+}
+
+.not-sent-pic {
+    position: absolute;
+    right: -4px;
+    cursor: pointer;
+    top: 7px;
+}
+
+.not-sent-cont details.outer-menu, 
+.not-sent-cont .outer-menu summary {
+    position: relative;
+}
+
+.outer-menu:not([open]) .inner-menu
+{
+    display: none;
+}
+
+.outer-menu[open] .inner-menu
+{
+    display: flex;
+    padding: 10px;
+    position: absolute;
+    background: white;
+    color: black;
+    right: -3px;
+    border: 1px lightgray solid;
+    top: 35px;
+    z-index: 10;
+}
+
+.outer-menu[open] .inner-menu:hover {
+    background-color: lightblue;
+    cursor: pointer;
+}
+
+/* if we allow the resent message to "work" */
+.not-sent-cont:has(.send-true.inner-menu[open]) .grouptext-info,
+.not-sent-cont:has(.send-true.inner-menu[open]) .outer-menu
+{
+    display: none;
+}
+
+.not-sent-cont:has(.send-true.inner-menu[open]) .breply
+{
+    left: 0px;
+}
+
+/* if we do NOT allow the resent message to "work" */
+.not-sent-cont:has(.send-false.inner-menu[open]) .resend-response,
+.not-sent-cont:has(.send-false.inner-menu:not([open])) .resend-prompt
+{
+    display: inline-block;
+}
+
+.not-sent-cont:has(.send-false.inner-menu:not([open])) .resend-response,
+.not-sent-cont:has(.send-false.inner-menu[open]) .resend-prompt
+{
+    display: none;
+}
+
+p.header {
+    margin-bottom: 20px;
+}
+  
+.header {
+  min-width: 300px;
+  background-color: #f6f6f6;
+  border-bottom: 1px solid #b2b2b2;
+  color: #000000;
+  font-weight: bold;
+  padding-bottom: .5em;
+  padding-top: .5em;
+  margin-left: -.5em;
+  margin-right: -.5em;
+  margin-bottom: -2em;
+  text-align: center;
+  text-transform: capitalize;
+  display: table;
+}
+
+.messagebody {
+    /* background-color: #FFFFFF; */
+    display: table;
+    padding-left: .5em;
+    padding-right: .5em;
+  }
+
+  .text {
+  float: left;
+  color: black;
+  margin: 0px 0px 0.5em;
+  border-radius: 1em;
+  padding: 0.5em 1em;
+  background: #e5e5ea;
+  max-width: 75%;
+  clear: both;
+  position: relative;
+}
+
+.text::after {
+  content: "";
+  position: absolute;
+  left: -.5em;
+  bottom: 0px;
+  width: 0.5em;
+  height: 1em;
+  border-right: 0.5em solid #e5e5ea;
+  border-bottom-right-radius: 1em 0.5em;
+}
+
+.breply {
+  float: right;
+  color: #FFFFFF;
+  margin: 0px 0px 0.5em;
+  border-radius: 1em;
+  padding: 0.5em 1em;
+  background: #1289fe;
+  max-width: 75%;
+  clear: both;
+  position: relative;
+}
+
+.breply::after {
+  content: "";
+  position: absolute;
+  right: -0.5em;
+  bottom: 0px;
+  width: 0.5em;
+  height: 1em;
+  border-left: 0.5em solid #1289fe;
+  border-bottom-left-radius: 1em 0.5em;
+}
+
+.time {
+  min-width: 295px;
+  /* color: #7B7C80; */
+  opacity: 0.5;
+  font-size: .75em;
+  padding-bottom: .5em;
+  padding-top: .5em;
+  margin-left: -.5em;
+  margin-right: -.5em;
+  margin-bottom: 0.5em;
+  text-align: center;
+  display: table;
+}
+
+.time img {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  display: inline-flex;
+  margin-bottom: -5px;
+}
+
+.grouptext {
+  color: #7B7C80;
+  font-size: .75em;
+  padding-bottom: .5em;
+  padding-top: 0px;
+  margin-left: .5em;
+  margin-bottom: -1.5em;
+  text-align: left;
+  display: table;
+  clear: both;
+}
+
+/***ios typing indicator***/
+
+.ios-typing-indicator {
+  background-color: #e6e7ed;
+  width: auto;
+  border-radius: 1em;
+  padding: .5em 1em;
+  display: table;
+  margin: 0 0 .5em;
+  position: relative;
+  overflow: hidden;
+  text-align: left;
+  clear: both;
+}
+
+.ios-typing-indicator::before,
+.ios-typing-indicator::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: -2px;
+  height: 12px;
+  width: 12px;
+  border-radius: 50%;
+  background-color: #e6e7ed;
+}
+
+.ios-typing-indicator::after {
+  height: 6px;
+  width: 6px;
+  left: -6px;
+  bottom: -6px;
+}
+
+.ios-typing-indicator span {
+  height: 15px;
+  width: 15px;
+  float: left;
+  margin: 0 1px;
+  background-color: #9E9EA1;
+  display: block;
+  border-radius: 50%;
+  opacity: 0.4;
+}
+
+.ios-typing-indicator span {
+  height: .65em;
+  width: .65em;
+  float: left;
+  margin: .425em 0 .425em .25em;
+  margin-left: 0.25em;
+  background-color: #9e9ea1;
+  display: inline-block;
+  border-radius: 50%;
+  opacity: .5;
+}
+
+.ios-typing-indicator span:first-child {
+  margin-left: 0;
+}
+
+.ios-typing-indicator span:nth-child(1) {
+  opacity: .85;
+}
+
+.ios-typing-indicator span:nth-child(2) {
+  opacity: .65;
+}
+
+/***teams typing indicator***/
+
+.typing-indicator {
+  background-color: #e6e7ed;
+  width: auto;
+  border-radius: 0.5em;
+  padding: .5em 1em;
+  display: table;
+  margin: 0 0 .5em;
+  position: relative;
+  overflow: hidden;
+  text-align: left;
+  clear: both;
+}
+
+.typing-indicator::before,
+.typing-indicator::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: -2px;
+  height: 12px;
+  width: 12px;
+  border-radius: 50%;
+  background-color: #e6e7ed;
+}
+
+.typing-indicator::after {
+  height: 6px;
+  width: 6px;
+  left: -6px;
+  bottom: -6px;
+}
+
+.typing-indicator span {
+  height: 15px;
+  width: 15px;
+  float: left;
+  margin: 0 1px;
+  background-color: #9E9EA1;
+  display: block;
+  border-radius: 50%;
+  opacity: 0.4;
+}
+
+.typing-indicator span {
+  height: .65em;
+  width: .65em;
+  float: left;
+  margin: .425em 0 .425em .25em;
+  margin-left: 0.25em;
+  background-color: #9e9ea1;
+  display: inline-block;
+  border-radius: 50%;
+  opacity: .5;
+}
+
+.typing-indicator span:first-child {
+  margin-left: 0;
+}
+
+.typing-indicator span:nth-child(1) {
+  opacity: .85;
+}
+
+.typing-indicator span:nth-child(2) {
+  opacity: .65;
+}
+
+.tagme {
+  font-weight: 600;
+  color:#3f8dde;
+}
+
+.tagyou {
+  font-weight: 600;
+}
+
+/******teams********/
+
+.w-text {
+  float: left;
+  color: #000000;
+  margin: 0 0 0.5em;
+  border-radius: 0.5em;
+  padding: 0.5em 1em;
+  background: #e5e5ea;
+  max-width: 75%;
+  clear: both;
+  position: relative;
+}
+
+.p-reply {
+  float: right;
+  color: #FFFFFF;
+  margin: 0 0 0.5em;
+  border-radius: 0.5em;
+  padding: 0.5em 1em;
+  background: #5c5fc7;
+  max-width: 75%;
+  clear: both;
+  position: relative;
+}
+
+.teams-header {
+  display:flex;
+  border-bottom:1px solid #a2a2a2;
+  align-items: center;
+  height:2.5em;
+  max-width: 300px;
+  margin-left: auto;
+  margin-right:auto;
+  position:relative;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.li-h2{
+font-size: 0.9em;
+color: black;
+margin-left: 5px;
+font-weight: bold;
+margin-bottom: 0px;
+margin-top: 0px;
+}
+
+.li-h3{
+font-size: 0.7em;
+color: #a2a2a2;
+margin-left: 5px;
+margin-top: 0px;
+margin-bottom: 0px;
+}
+
+.teams-back {
+  display: block;
+  height:30px;
+}
+
+.teams-video {
+  display: block;
+  height:30px;
+  position:absolute;
+  right: 50px;
+  left:auto;
+}
+
+.teams-phone {
+  display: block;
+  height:24px;
+  position:absolute;
+  right: 20px;
+}
+
+.teams-contact {
+  display:inline-block;
+  margin-left:45px;
+}
+
+.teams-contact::before{
+  content:"";
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  background-color:gray;
+  display:inline-block;
+  position:absolute;
+  /* margin-top:1px; */
+  margin-left:-35px;
+}
+
+.emoji-txt {
+  font-size: 2em;
+}
+
+.teams-error {
+  background-color: #fef4fa;
+  border:1px solid #e5dfe6; 
+  padding:5px;
+  font-size: 0.7em;
+  max-width:300px;
+  color:#b27cb1;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.teams-error::after {
+  content:'X';
+  float:right;
+}
+
+
+/****phone lockscreen***/
+
+/**Jin's phone updates***/
+
+.phone-container {
+  margin:auto;
+  position:relative;
+  max-width:400px;
+  width:100%;
+  height:600px;
+  display:flex;
+  align-items:center;
+  flex-direction:column;
+
+  /* defaults are for alarm mode? might want to change this. */
+  background: linear-gradient(gray, #bbb);
+  color:white;
+}
+/* would like this to be the android menu buttons; home, back, etc  */
+/* if you do this, other margins will have to change  */
+/* but also you'll need a light and dark mode i think?  */
+/* wait this doesnt exist on the notification screen, actually  */
+/* misspelled on purpose so it wont touch anything right now  */
+.pphone-container::after{
+  content:"";
+  position:absolute;
+  bottom:0;
+  max-width:400px;
+  width:100%;
+  height:40px;
+  /* but the buttons */
+  /* background: url("https://cdna.artstation.com/p/assets/images/images/062/237/438/large/brendan-rodriguez-don-quixote.jpg?1682650401") no-repeat !important; */
+  background-size:400px 40px;
+}
+
+.phone-notif-container{
+  /* to fix the weird offset  */
+  margin-left:10px;
+  margin-bottom:5px;
+  max-width:400px;
+  /* addressing the odd scrollbar overflow, not perfect  */
+  margin-right:5px;
+  width:100%;
+  max-height:450px;
+  overflow-y:scroll;
+  /* may not be supported on all browsers */
+  scrollbar-width: 5px;
+  scrollbar-color:gray lightgray;
+  position:relative;
+  font-family: sans-serif;
+  font-size:.9em;
+}
+
+/* holds the "settings" and "clear" buttons that live after the notifications list  */
+.phone-notif-settings{
+  max-width:400px;
+  width:100%;
+}
+
+.phone-notif-settings::before{
+  content:"⚙️ Notification settings";
+  color:white;
+  font-size:.8em;
+  margin-left:10px;
+  cursor:pointer;
+
+}
+
+.phone-notif-settings::after{
+  content:"Clear";
+  font-size:.8em;
+  border-radius: 10px;
+  padding: 4px 9px;
+  margin:0px 10px;
+  cursor:default;
+  background-color:#c5c5c5ac;
+  color:rgb(133, 133, 133);
+  display:none;
+  right:14;
+  margin-top:-19px;
+  position:absolute;
+  /* if you ever want to switch to z-index trickery: take this class, gut it, turn it into a slightly larger box, make that box have a bg color of invisible. then take the clear button and change the color of it instead of display:none-ing it.  */
+}
+
+
+/* phone styles */
+/* used for alarm */
+.phone-off{
+  background: #3b3b3b;
+  color:white;
+}
+.phone-on{
+  background: linear-gradient(#e5e5e5, #e5e5e5);
+  color:black;
+}
+
+.phone-dark-mode{
+  color:white;
+}
+
+.phone-dark-mode .phone-notif{
+  color:white;
+  background-color:#1f2024;
+}
+
+.phone-bg-pic{
+  /* background: url("https://cdna.artstation.com/p/assets/images/images/062/237/438/large/brendan-rodriguez-don-quixote.jpg?1682650401") no-repeat; */
+  
+  background: url("https://raw.githubusercontent.com/jihnari/misc/main/genshin/uni/img/phone-bgs/tighs-bg.png") no-repeat;
+
+  /* failsafe */
+  background-color:#e5e5e5;
+
+  /* toss this out if it makes your image squish funny, but it WILL just be whatever size it wants to and overflow into nothing  */
+background-size:400px 600px;
+}
+.phone-bg-pic-lois{
+  background: url("https://raw.githubusercontent.com/mackerelcheese/gotsoul/refs/heads/main/imgs/phone-bg/lois-bg.jpg") no-repeat;
+
+  /* failsafe */
+  background-color:#3a4340;
+  background-size:400px 600px;
+  color:white;
+}
+
+.phone-bg-pic-siri{
+  background: url("https://raw.githubusercontent.com/mackerelcheese/One-Shots/refs/heads/main/noah-kahan/phone-screen/siri-phone.jpg") no-repeat;
+
+  /* failsafe */
+  background-color:#3a4340;
+  background-size:400px 600px;
+  color:white;
+}
+
+
+.phone-alarm-x{
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  background-color:white;
+  margin: auto 0 50px 0;   
+  position:relative;
+  cursor:pointer;
+}
+.phone-alarm-x::after{
+  /* &times; */
+  content:'×';
+
+  color:black;
+  font-size:60px;
+  /* centered, but at what cost  */
+  position:absolute;
+  top:-10px;
+  left:8;
+}
+
+.phone-alarm-x:hover{
+  background-color:#bbb;
+  transition:1s;
+}
+.phone-snooze{
+  background-color:rgb(203, 201, 201);
+  border-radius:15px;
+  padding:4px 15px;
+  margin-bottom:30px;
+  cursor:pointer;
+}
+.phone-snooze:hover{
+  background-color:gray;
+}
+
+.phone-time {
+  font-size: 4rem;
+  margin-top:20px;
+  margin-bottom: 30px;
+}
+
+.phone-incoming {
+  font-size: 2rem;
+  margin:0;
+}
+
+.phone-date {
+  font-size: 0.8rem;
+}
+.phone-alarm-name {
+  font-size: 0.8rem;
+  margin-top:-10px;
+}
+
+.phone-call-bottom {
+  /*border: 1px solid black;*/
+  width:70%;
+  margin-bottom: 50px;
+  margin-top: auto;
+  border-radius: 5px;
+  height:200px;
+  display: flex;
+  flex-direction: column;
+}
+
+.phone-call-bottom-row {
+  /*border: 1px solid yellow;*/
+  height:50%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.phone-call-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.phone-call-item img {
+  height:30px;
+  width:30px;
+}
+
+.phone-call-item p {
+  font-size: 0.85em;
+}
+
+.phone-call-decline {
+  background-color: red;
+  padding:5px;
+  height:45px;
+  width:45px;
+  border-radius: 50%;
+  margin-top: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.phone-call-decline img {
+  height:30px;
+  width:30px;
+}
+
+.phone-call-accept {
+  background-color: green;
+  padding:5px;
+  height:45px;
+  width:45px;
+  border-radius: 50%;
+  margin-top: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.phone-call-accept img {
+  height:30px;
+  width:30px;
+}
+
+.phone-call-hangup {
+  margin-bottom: 50px;
+}
+
+.phone-call-ongoing-item {
+  background-color: grey;
+  padding:5px;
+  height:45px;
+  width:45px;
+  border-radius: 50%;
+  margin-top: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.phone-call-ongoing-item img {
+  height:25px;
+  width:25px;
+}
+
+.phone-notif{
+  /* this has to have a width if you take it out of phone-notif-container, but otherwise is fine. */
+  background-color:white;
+  border-radius:15px;
+  color:black;
+  padding:10px 20px 10px 40px;
+  margin:5px 10px 5px 5px;
+  height:auto;
+}
+
+/* overflow none, ... out */
+/* not working currently  */
+.phone-notif-header{
+  font-weight:bold;
+  overflow:hidden;
+}
+.phone-notif-header::before{
+  content:"";
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  background-color:gray;
+
+  display:inline-block;
+  position:absolute;
+  /* margin-top:1px; */
+  margin-left:-35px;
+}
+.phone-notif-subheader{
+  color:rgb(150, 150, 150);
+  font-size:.8rem;
+  font-weight:normal;
+  margin-left:5px;
+}
+
+.phone-notif-time{
+  color:lightgray;
+  font-size:.8rem;
+  font-weight:normal;
+  margin-left:5px;
+}
+.phone-notif-header-email{
+  font-size:.8rem;
+}
+/* hack fix */
+.phone-notif p{
+  margin:5px;
+  /* display:flex; */
+  /* justify-content:space-around; */
+}
+.phone-weather-icons{
+  justify-content:space-between;
+  display:flex;
+}
+/* unsure where this is happening tbh  */
+.weather-notif p{
+  margin-left:-10px;
+}
+
+.phone-update-progress-50 {
+  border-bottom: 3px solid transparent;
+  /* padding-left: 5px; */
+  padding-top: 5px;
+  /* padding-bottom:10px; */
+  margin-bottom:10px;
+  margin-left:5px;
+  border-image: linear-gradient(to right, #0481FF 50%, #DADBDC 50%);
+  border-image-slice: 1;
+}
+
+.phone-notif-podcast-info::before{
+  content:"";
+  height: 35px;
+  width: 35px;
+  border-radius: 20%;
+  background-color:gray;
+
+  display:inline-block;
+  position:absolute;
+  /* margin-top:1px; */
+  margin-left:-45px;
+}
+.phone-notif-podcast-info{
+  /* float:left; */
+  margin-left:15px;
+}
+.phone-notif-podcast-info::after{
+  content:"⏮	▶	⏭";
+  font-size:2rem;
+  overflow:hidden;
+  /* display:inline-block; */
+  /* position:absolute; */
+  /* margin-left:auto; */
+
+  /* justify-content:right; */
+  float:right;
+  /* top:0; */
+  /* position:absolute; */
+  /* margin-left:auto; */
+  /* margin-bottom:auto; */
+  /* margin-top:auto; */
+  /* align-self:flex-start; */
+  /* display:flex; */
+  /* top:0; */
+}
+
+.phone-notif-podcast-buttons{
+  font-size:2rem;
+  /* float:right; */
+  /* align-self:flex-end; */
+  /* margin-left:auto; */
+  /* display:inline-flex; */
+  position:absolute;
+  display:block;
+  /* margin-right:10px; */
+  /* margin-right:auto; */
+}
+
+/* notif icons */
+.notif-email .phone-notif-header::before{
+  /* change out for gmail-icon.png */
+  background: url("https://raw.githubusercontent.com/mackerelcheese/One-Shots/refs/heads/main/noah-kahan/phone-screen/notif-email.png") no-repeat;
+  background-color:#5B78A4;
+  background-size:15px 15px;
+  background-position: center;
+}
+
+.notif-spotify .phone-notif-header::before{
+  background: url("https://raw.githubusercontent.com/mackerelcheese/One-Shots/refs/heads/main/noah-kahan/spotifywhite.png") no-repeat;
+  background-color:#5B78A4;
+  background-size:25px 25px;
+  background-position: center;
+}
+
+.notif-alarm .phone-notif-header::before{
+  background: url("https://raw.githubusercontent.com/mackerelcheese/One-Shots/refs/heads/main/noah-kahan/phone-screen/alarm-clock-white.png") no-repeat;
+  background-color:#483248;
+  background-size:15px 15px;
+  background-position: center;
+}
+
+.notif-duo .phone-notif-header::before{
+  background: url("https://raw.githubusercontent.com/mackerelcheese/One-Shots/refs/heads/main/noah-kahan/phone-screen/duoicon-round.png") no-repeat;
+  background-color:#58cc02;
+  background-size:25px 25px;
+  background-position: center;
+}
+
+.notif-screen .phone-notif-header::before{
+  background: url("https://raw.githubusercontent.com/mackerelcheese/One-Shots/refs/heads/main/noah-kahan/phone-screen/hour-glass.png") no-repeat;
+  background-color:#5b55db;
+  background-size:15px 15px;
+  background-position: center;
+}
+
+.notif-calendar .phone-notif-header::before{
+  background: url("https://raw.githubusercontent.com/mackerelcheese/One-Shots/refs/heads/main/noah-kahan/phone-screen/notif-cal.png") no-repeat;
+  background-color:#00658B;
+  background-size:15px 15px;
+  background-position: center;
+}
+
+.notif-signal .phone-notif-header::before{
+  background: url("https://raw.githubusercontent.com/mackerelcheese/One-Shots/refs/heads/main/noah-kahan/phone-screen/notif-signal.png") no-repeat;
+  background-color:#1A6CF7;
+  background-size:15px 15px;
+  background-position: center;
+}
+.notif-outlook .phone-notif-header::before{
+  background: url("https://raw.githubusercontent.com/mackerelcheese/One-Shots/refs/heads/main/noah-kahan/phone-screen/notif-outlook.png") no-repeat;
+  background-color:#0178D4;
+  background-size:15px 15px;
+  background-position: center;
+}
+.notif-outlook-overflow{
+  max-height: 2.4em;
+  display:block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.notif-sms .phone-notif-header::before{
+  background: url("https://raw.githubusercontent.com/mackerelcheese/One-Shots/refs/heads/main/noah-kahan/phone-screen/notif-sms.png") no-repeat;
+  background-color:#0080A3;
+  background-size:15px 15px;
+  background-position: center;
+}
+.notif-private-browser .phone-notif-header::before{
+  background: url("https://raw.githubusercontent.com/jihnari/misc/main/_reusable/phonescreen/img/private-icon.png") no-repeat;
+  background-color:purple;
+  background-size:25px 25px;
+  background-position: center;
+}
+
+.notif-calls .phone-notif-header::before{
+  background: url("https://raw.githubusercontent.com/jihnari/misc/main/_reusable/phonescreen/img/private-icon.png") no-repeat;
+  background-color:green;
+  background-size:25px 25px;
+  background-position: center;
+}
+
+.notif-tiktok .phone-notif-header::before{
+  background: url("https://raw.githubusercontent.com/mackerelcheese/One-Shots/refs/heads/main/noah-kahan/phone-screen/notif-tiktok.png") no-repeat;
+  background-color:black;
+  background-size:15px 15px;
+  background-position: center;
+}
+
+.notif-setting .phone-notif-header::before{
+  background: url("https://raw.githubusercontent.com/mackerelcheese/One-Shots/refs/heads/main/noah-kahan/phone-screen/notif-settings.png") no-repeat;
+  background-color:#808080;
+  background-size:15px 15px;
+  background-position: center;
+}
+
+.notif-shop .phone-notif-header::before{
+  background: url("https://raw.githubusercontent.com/mackerelcheese/One-Shots/refs/heads/main/noah-kahan/phone-screen/notif-shop.png") no-repeat;
+  background-color:#ff4500;
+  background-size:15px 15px;
+  background-position: center;
+}
+
+.notif-news .phone-notif-header::before{
+  background: url("https://raw.githubusercontent.com/mackerelcheese/One-Shots/refs/heads/main/noah-kahan/phone-screen/notif-news.png") no-repeat;
+  background-color:#00ab41;
+  background-size:13px 13px;
+  background-position: center;
+}
+
+.notif-sm .phone-notif-header::before{
+  background: url("https://raw.githubusercontent.com/mackerelcheese/gotsoul/refs/heads/main/imgs/misc/sm-icon-white.png") no-repeat;
+  background-color:red;
+  background-size:18px;
+  background-position: center;
+}
+
+.notif-podcast{
+  /* each podcast uses the show cover as the icon, and there is no bg color. the shape is also bigger and more square.   */
+  /* background: url("https://img.icons8.com/?size=100&id=rUgzXdXFnhmg&format=png&color=FFFFFF") no-repeat;   */
+  /* background-size:15px 15px; */
+  background-position: center;
+}
+
+/* i want notif-download to squish the top line but like. how.  */
+.notif-download .phone-notif-header::before{
+  background: url("https://raw.githubusercontent.com/mackerelcheese/One-Shots/refs/heads/main/noah-kahan/phone-screen/notif-settings.png") no-repeat;
+  background-color:grey;
+  background-size:15px 15px;
+  background-position: center;
+}
+
+.phone-sp-50 {
+  border-bottom: 3px solid transparent;
+  /* padding-left: 5px; */
+  padding-top: 5px;
+  /* padding-bottom:10px; */
+  margin-bottom:10px;
+  margin-left:5px;
+  border-image: linear-gradient(to right, white 50%, #3a4340 50%);
+  border-image-slice: 1;
+}
+
+.phone-noti-sp-time {
+  display: flex;
+  justify-content: space-between;
+}
+
+.phone-noti-sp-img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height:25px;
+}
+
+.phone-noti-sp-img > img {
+  display:inline-block;
+  height:30px;
+}
+
+.sp-play {
+  display:inline-block;
+  height:16px !important;
+}
